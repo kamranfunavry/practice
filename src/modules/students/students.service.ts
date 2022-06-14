@@ -55,7 +55,15 @@ export class StudentsService {
     );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} student`;
+  async remove(id: number) {
+    let result = await Student.destroy({ where: { id } })
+    if (!result) {
+      throw new NotFoundException('NFT Not Found');
+    }
+    return new GenericResponseDto(
+      HttpStatus.OK,
+      'User deleted successfully',
+      [],
+    );
   }
 }
