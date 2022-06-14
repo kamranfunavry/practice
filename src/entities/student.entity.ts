@@ -17,5 +17,5 @@ export class Student extends Model{
     description:string
 
     @Column
-    cnic:number
+    cnic:string
 }

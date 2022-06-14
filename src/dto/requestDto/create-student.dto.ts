@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsJSON, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreateStudentDto {
     @IsNotEmpty()
@@ -10,7 +10,7 @@ export class CreateStudentDto {
     description: string
 
     @IsNotEmpty()
-    @IsNumber()
-    cnic: number
+    @IsString()
+    cnic: string
 
 }
