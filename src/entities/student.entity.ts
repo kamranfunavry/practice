@@ -1,21 +1,26 @@
-import { AutoIncrement, Column, HasMany, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import { AutoIncrement, BelongsToMany, Column, HasMany, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import { StudentsSubject } from "./students-has-subjects.entity";
+import { Subject } from "./subject.entity";
 @Table({
-    timestamps : true
+    timestamps: true
 })
-export class Student extends Model{
+export class Student extends Model {
 
     @PrimaryKey
     @AutoIncrement
     @Unique
     @Column
-    id:number
+    id: number
 
     @Column
-    name:string
+    name: string
 
     @Column
-    description:string
+    description: string
 
     @Column
-    cnic:string
+    cnic: string
+
+    @BelongsToMany(() => Subject, () => StudentsSubject)
+    subjects: Subject[]
 }

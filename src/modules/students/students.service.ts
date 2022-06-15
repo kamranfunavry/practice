@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { GenericResponseDto } from 'src/dto/response/genericResponse.dto';
 import { Student } from 'src/entities/student.entity';
+import { StudentsSubject } from 'src/entities/students-has-subjects.entity';
 import { CreateStudentDto } from '../../dto/requestDto/create-student.dto';
 import { UpdateStudentDto } from '../../dto/requestDto/update-student.dto';
 
@@ -8,6 +9,11 @@ import { UpdateStudentDto } from '../../dto/requestDto/update-student.dto';
 export class StudentsService {
   async create(createStudentDto: CreateStudentDto) {
     const result = await Student.create({ ...createStudentDto })
+    const data = {
+      studentId: result.id,
+      subjectId: createStudentDto.subjectId
+    }
+    const result1 = await StudentsSubject.create({ ...data })
     return new GenericResponseDto(
       HttpStatus.CREATED,
       'Created Successfully',
