@@ -2,7 +2,15 @@ import { AutoIncrement, BelongsToMany, Column, HasMany, Model, PrimaryKey, Table
 import { StudentsSubject } from "./students-has-subjects.entity";
 import { Subject } from "./subject.entity";
 @Table({
-    timestamps: true
+    timestamps: true,
+    scopes: {
+        private: {
+            attributes: ['id', 'name', 'description', 'cnic']
+        },
+        public: {
+            attributes: ['name', 'description']
+        }
+    }
 })
 export class Student extends Model {
 

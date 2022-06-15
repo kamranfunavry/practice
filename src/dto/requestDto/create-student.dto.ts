@@ -15,6 +15,6 @@ export class CreateStudentDto {
 
     @IsNotEmpty()
     @IsNumber()
-    subjectId: number
+    subjectId: number[]
 
 }
