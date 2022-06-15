@@ -1,5 +1,6 @@
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { GenericResponseDto } from 'src/dto/response/genericResponse.dto';
+import { Class } from 'src/entities/class.entity';
 import { Student } from 'src/entities/student.entity';
 import { StudentsSubject } from 'src/entities/students-has-subjects.entity';
 import { Subject } from 'src/entities/subject.entity';
@@ -32,6 +33,11 @@ export class StudentsService {
           required: true,
           as: 'subjects',
           through: { attributes: [] }
+        },
+        {
+          model: Class,
+          required: true,
+          as: 'class',
         }
       ]
     });

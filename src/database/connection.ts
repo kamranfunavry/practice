@@ -4,6 +4,7 @@ import 'dotenv/config'
 import { Student } from "src/entities/student.entity";
 import { Subject } from "src/entities/subject.entity";
 import { StudentsSubject } from "src/entities/students-has-subjects.entity";
+import { Class } from "src/entities/class.entity";
 
 export const Connection = [
   {
@@ -17,7 +18,7 @@ export const Connection = [
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
         logging: true,
-        models: [Student, Subject, StudentsSubject],
+        models: [Student, Subject, StudentsSubject, Class],
         pool: {
           max: 5,
           min: 0,
