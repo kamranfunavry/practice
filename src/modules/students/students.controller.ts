@@ -19,7 +19,7 @@ export class StudentsController {
 
   @Post("getAramex")
   getAramex() {
-    return this.studentsService.getCountries();
+    return this.studentsService.calculateRates(1, 'kg', 1);
   }
 
   @Get('getUserById/:id')
