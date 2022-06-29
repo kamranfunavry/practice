@@ -17,6 +17,11 @@ export class StudentsController {
     return this.studentsService.findAll();
   }
 
+  @Post("getAramex")
+  getAramex() {
+    return this.studentsService.getCountries();
+  }
+
   @Get('getUserById/:id')
   findOne(@Param('id') id: string) {
     return this.studentsService.findOne(+id);
