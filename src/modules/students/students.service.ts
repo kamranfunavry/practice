@@ -113,6 +113,29 @@ export class StudentsService {
     );
   }
 
+  async countriesAPI() {
+    this.normalizeForCountriesAPI();
+    await this.dispatch(
+      'D:/PRACTICE-PROJECT/nest-practice/practice/src/modules/students/handlers/location-api-wsdl.wsdl',
+      'FetchCountries'
+    );
+    return this.result;
+  }
+
+  normalizeForCountriesAPI(
+    transaction = null
+  ) {
+    this.args = {
+      CountriesFetchingRequest: {
+        ClientInfo: this.aramexClient,
+        Transaction: this.transaction,
+      }
+    };
+    if (transaction != null) {
+      this.args['CountriesFetchingRequest']['Transaction'] = transaction;
+    }
+  }
+
   async calculateRates(
     NumberOfPieces,
     Unit,
@@ -185,6 +208,210 @@ export class StudentsService {
     };
     if (transaction != null) {
       this.args['RateCalculatorRequest']['Transaction'] = transaction;
+    }
+  }
+
+  async createShipment() {
+    this.normalizeForCreateShipment();
+    await this.dispatch(
+      'D:/PRACTICE-PROJECT/nest-practice/practice/src/modules/students/handlers/shipping-services-api-wsdl.wsdl',
+      'CreateShipments'
+    );
+    return this.result;
+  }
+
+  normalizeForCreateShipment(
+    transaction = null
+  ) {
+    this.args = {
+      ShipmentCreationRequest: {
+        ClientInfo: this.aramexClient,
+        Transaction: this.transaction,
+        LabelInfo: null,
+        Shipments: [
+          {
+            Reference1: "",
+            Reference2: "",
+            Reference3: "",
+            Shipper: {
+              Reference1: "",
+              Reference2: "",
+              AccountNumber: "20016",
+              PartyAddress: {
+                Line1: "Test",
+                Line2: "",
+                Line3: "",
+                City: "Amman",
+                StateOrProvinceCode: "",
+                PostCode: "",
+                CountryCode: "JO",
+                Longitude: 0,
+                Latitude: 0,
+                BuildingNumber: null,
+                BuildingName: null,
+                Floor: null,
+                Apartment: null,
+                POBox: null,
+                Description: null
+              },
+              Contact: {
+                Department: "",
+                PersonName: "aramex",
+                Title: "",
+                CompanyName: "aramex",
+                PhoneNumber1: "009625515111",
+                PhoneNumber1Ext: "",
+                PhoneNumber2: "",
+                PhoneNumber2Ext: "",
+                FaxNumber: "",
+                CellPhone: "9677956000200",
+                EmailAddress: "test@test.com",
+                Type: ""
+              }
+            },
+            Consignee: {
+              Reference1: "",
+              Reference2: "",
+              AccountNumber: "",
+              PartyAddress: {
+                Line1: "Test",
+                Line2: "",
+                Line3: "",
+                City: "Duabi",
+                StateOrProvinceCode: "",
+                PostCode: "",
+                CountryCode: "AE",
+                Longitude: 0,
+                Latitude: 0,
+                BuildingNumber: "",
+                BuildingName: "",
+                Floor: "",
+                Apartment: "",
+                POBox: null,
+                Description: ""
+              },
+              Contact: {
+                Department: "",
+                PersonName: "aramex",
+                Title: "",
+                CompanyName: "aramex",
+                PhoneNumber1: "009625515111",
+                PhoneNumber1Ext: "",
+                PhoneNumber2: "",
+                PhoneNumber2Ext: "",
+                FaxNumber: "",
+                CellPhone: "9627956000200",
+                EmailAddress: "test@test.com",
+                Type: ""
+              }
+            },
+            ThirdParty: {
+              Reference1: "",
+              Reference2: "",
+              AccountNumber: "",
+              PartyAddress: {
+                Line1: "",
+                Line2: "",
+                Line3: "",
+                City: "",
+                StateOrProvinceCode: "",
+                PostCode: "",
+                CountryCode: "",
+                Longitude: 0,
+                Latitude: 0,
+                BuildingNumber: null,
+                BuildingName: null,
+                Floor: null,
+                Apartment: null,
+                POBox: null,
+                Description: null
+              },
+              Contact: {
+                Department: "",
+                PersonName: "",
+                Title: "",
+                CompanyName: "",
+                PhoneNumber1: "",
+                PhoneNumber1Ext: "",
+                PhoneNumber2: "",
+                PhoneNumber2Ext: "",
+                FaxNumber: "",
+                CellPhone: "",
+                EmailAddress: "",
+                Type: ""
+              }
+            },
+            ShippingDateTime: "\/Date(1484085970000-0500)\/",
+            DueDate: "\/Date(1484085970000-0500)\/",
+            Comments: "",
+            PickupLocation: "",
+            OperationsInstructions: "",
+            AccountingInstrcutions: "",
+            Details: {
+              Dimensions: null,
+              ActualWeight: {
+                Unit: "KG",
+                Value: 0.5
+              },
+              ChargeableWeight: null,
+              DescriptionOfGoods: "Books",
+              GoodsOriginCountry: "JO",
+              NumberOfPieces: 1,
+              ProductGroup: "EXP",
+              ProductType: "PDX",
+              PaymentType: "P",
+              PaymentOptions: "",
+              CustomsValueAmount: null,
+              CashOnDeliveryAmount: null,
+              InsuranceAmount: null,
+              CashAdditionalAmount: null,
+              CashAdditionalAmountDescription: "",
+              CollectAmount: null,
+              Services: "",
+              Items: []
+            },
+            Attachments: [],
+            ForeignHAWB: "",
+            TransportType: 0,
+            PickupGUID: "",
+            Number: null,
+            ScheduledDelivery: null
+          }
+        ],
+      }
+    };
+    if (transaction != null) {
+      this.args['ShipmentCreationRequest']['Transaction'] = transaction;
+    }
+  }
+
+  async printLabel() {
+    this.normalizeForPrintLabel();
+    await this.dispatch(
+      'D:/PRACTICE-PROJECT/nest-practice/practice/src/modules/students/handlers/shipping-services-api-wsdl.wsdl',
+      'PrintLabel'
+    );
+    return this.result;
+  }
+
+  normalizeForPrintLabel(
+    transaction = null
+  ) {
+    this.args = {
+      LabelPrintingRequest: {
+        ClientInfo: this.aramexClient,
+        LabelInfo: {
+          ReportID: 9201,
+          ReportType: "URL"
+        },
+        OriginEntity: "AMM",
+        ProductGroup: "EXP",
+        ShipmentNumber: "3958011433",
+        Transaction: this.transaction
+      }
+    };
+    if (transaction != null) {
+      this.args['LabelPrintingRequest']['Transaction'] = transaction;
     }
   }
 
